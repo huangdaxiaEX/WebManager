@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- create by zzy -->
+
+<mapper namespace="com.cqut.dao.manageDao.ManageDao">
+	<!-- select -->
+	<select id="getByID" resultType="com.cqut.entity.manage.Manage">
+		<![CDATA[   
+			select * from manage 
+		]]>
+		<where>
+			manageid = #{ID}
+		</where>
+	</select>
+	
+	<select id="getByCondition" resultType="com.cqut.entity.manage.Manage">
+		<![CDATA[   
+			select * from manage 
+		]]>
+		<where>
+			<if test="condition != null">
+		 		${condition}
+		 	</if>
+		</where>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		select count(distinct manageid) from manage
+		<where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>	
+        </where>
+	</select>
+	
+	<select id="findByID" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from manage 
+        <where>
+        	manageid = #{ID}
+        </where>
+	</select>	
+	
+	<select id="findByCondition" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from manage 
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</select>		
+	
+	<!-- update -->
+	<update id="updateByID" >
+		<![CDATA[  
+			update manage set 
+				"manageid" = #{entity.manageID},
+				"imageid" = #{entity.imageID}
+      	]]>
+      	<where>
+      		manageid = #{ID}
+      	</where>  		
+	</update>
+	
+	<update id="updateByCondition">
+		<![CDATA[  
+			update manage set 
+				"manageid" = #{entity.manageID},
+				"imageid" = #{entity.imageID}
+      	]]>
+      	<where>
+      		<if test="condition != null">
+      			${condition}
+      		</if>
+      	</where>  		
+	</update>
+	
+	<update id="updatePropByID">
+		<![CDATA[  
+			update manage set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	manageid = #{ID}
+        </where>
+	</update>
+	
+	<update id="updatePropByCondition">
+		<![CDATA[  
+			update manage set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</update>	
+	
+	<!-- delete -->
+	<delete id="deleteByID" parameterType="string">
+		<![CDATA[   
+			delete from manage   
+		]]>
+		<where>
+			manageid = #{ID}
+		</where>
+	</delete>	
+
+	<delete id="deleteByCondition" parameterType="string">
+		<![CDATA[   
+			delete from manage  
+		]]>
+		<where>
+			<if test="condition != null">
+				${condition}
+			</if>	
+		</where>	
+	</delete>	
+	
+	<delete id="deleteManages" parameterType="string">
+		<![CDATA[   
+			delete from activity    
+		]]>
+		<where>
+			 manageid in
+			 <foreach collection="IDs" item="item" index="index" separator="," open="(" close=")">
+          		#{item}
+        	 </foreach>
+		</where>	
+	</delete>
+	
+	<!-- save -->
+	<insert id="save" parameterType="com.cqut.entity.manage.Manage">  
+     	<![CDATA[   
+        	 insert into manage (manageid, imageid)
+        	 values (#{manageID}, #{imageID})	
+    	 ]]>   
+    </insert>
+    
+    <insert id="saveManages"> 
+	 	 <![CDATA[  
+	    	insert into manage (manageid, imageid) 
+	    	VALUES 
+	    ]]>  
+	    <foreach collection="entities" item="item" index="index" separator=",">   
+	         (#{item.manageID}, #{item.imageID})
+	    </foreach> 
+	</insert> 
+	
+</mapper>

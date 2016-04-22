@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- create by zzy -->
+
+<mapper namespace="com.cqut.dao.crowdFundingDao.CrowdFundingDao">
+	<!-- select -->
+	<select id="getByID" resultType="com.cqut.entity.crowdFunding.CrowdFunding">
+		<![CDATA[   
+			select * from crowdfunding 
+		]]>
+		<where>
+			crowdfundingid = #{ID}
+		</where>
+	</select>
+	
+	<select id="getByCondition" resultType="com.cqut.entity.crowdFunding.CrowdFunding">
+		<![CDATA[   
+			select * from crowdfunding 
+		]]>
+		<where>
+			<if test="condition != null">
+		 		${condition}
+		 	</if>
+		</where>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		select count(distinct crowdfundingid) from crowdfunding
+		<where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>	
+        </where>
+	</select>
+	
+	<select id="findByID" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from crowdfunding 
+        <where>
+        	crowdfundingid = #{ID}
+        </where>
+	</select>	
+	
+	<select id="findByCondition" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from crowdfunding 
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</select>		
+	
+	<!-- update -->
+	<update id="updateByID" >
+		<![CDATA[  
+			update crowdfunding set 
+				"crowdfundingid" = #{entity.crowdFundingID},
+				"entryid" = #{entity.entryID},
+				"entrytitle" = #{entity.entryTitle},
+				"entrytype" = #{entity.entryType},
+				"entryprice" = #{entity.entryPrice},
+				"entrycontent" = #{entity.entryContent},
+				"entrystatus" = #{entity.entryStatus},
+				"doneprice" = #{entity.donePrice},
+				"process" = #{entity.process},
+				"publisherid" = #{entity.publisherID},
+				"publishtime" = #{entity.publishTime},
+				"deadtime" = #{entity.deadTime},
+				"image" = #{entity.image},
+				"totalperson" = #{entity.totalPerson},
+				"doneperson" = #{entity.donePerson}
+      	]]>
+      	<where>
+      		crowdfundingid = #{ID}
+      	</where>  		
+	</update>
+	
+	<update id="updateByCondition">
+		<![CDATA[  
+			update crowdfunding set 
+				"crowdfundingid" = #{entity.crowdFundingID},
+				"entryid" = #{entity.entryID},
+				"entrytitle" = #{entity.entryTitle},
+				"entrytype" = #{entity.entryType},
+				"entryprice" = #{entity.entryPrice},
+				"entrycontent" = #{entity.entryContent},
+				"entrystatus" = #{entity.entryStatus},
+				"doneprice" = #{entity.donePrice},
+				"process" = #{entity.process},
+				"publisherid" = #{entity.publisherID},
+				"publishtime" = #{entity.publishTime},
+				"deadtime" = #{entity.deadTime},
+				"image" = #{entity.image},
+				"totalperson" = #{entity.totalPerson},
+				"doneperson" = #{entity.donePerson}
+      	]]>
+      	<where>
+      		<if test="condition != null">
+      			${condition}
+      		</if>
+      	</where>  		
+	</update>
+	
+	<update id="updatePropByID">
+		<![CDATA[  
+			update crowdfunding set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	crowdfundingid = #{ID}
+        </where>
+	</update>
+	
+	<update id="updatePropByCondition">
+		<![CDATA[  
+			update crowdfunding set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</update>	
+	
+	<!-- delete -->
+	<delete id="deleteByID" parameterType="string">
+		<![CDATA[   
+			delete from crowdfunding   
+		]]>
+		<where>
+			crowdfundingid = #{ID}
+		</where>
+	</delete>	
+
+	<delete id="deleteByCondition" parameterType="string">
+		<![CDATA[   
+			delete from crowdfunding  
+		]]>
+		<where>
+			<if test="condition != null">
+				${condition}
+			</if>	
+		</where>	
+	</delete>	
+	
+	<delete id="deleteCrowdFundings" parameterType="string">
+		<![CDATA[   
+			delete from activity    
+		]]>
+		<where>
+			 crowdfundingid in
+			 <foreach collection="IDs" item="item" index="index" separator="," open="(" close=")">
+          		#{item}
+        	 </foreach>
+		</where>	
+	</delete>
+	
+	<!-- save -->
+	<insert id="save" parameterType="com.cqut.entity.crowdFunding.CrowdFunding">  
+     	<![CDATA[   
+        	 insert into crowdfunding (crowdfundingid, entryid, entrytitle, entrytype, entryprice, entrycontent, entrystatus, doneprice, process, publisherid, publishtime, deadtime, image, totalperson, doneperson)
+        	 values (#{crowdFundingID}, #{entryID}, #{entryTitle}, #{entryType}, #{entryPrice}, #{entryContent}, #{entryStatus}, #{donePrice}, #{process}, #{publisherID}, #{publishTime}, #{deadTime}, #{image}, #{totalPerson}, #{donePerson})	
+    	 ]]>   
+    </insert>
+    
+    <insert id="saveCrowdFundings"> 
+	 	 <![CDATA[  
+	    	insert into crowdfunding (crowdfundingid, entryid, entrytitle, entrytype, entryprice, entrycontent, entrystatus, doneprice, process, publisherid, publishtime, deadtime, image, totalperson, doneperson) 
+	    	VALUES 
+	    ]]>  
+	    <foreach collection="entities" item="item" index="index" separator=",">   
+	         (#{item.crowdFundingID}, #{item.entryID}, #{item.entryTitle}, #{item.entryType}, #{item.entryPrice}, #{item.entryContent}, #{item.entryStatus}, #{item.donePrice}, #{item.process}, #{item.publisherID}, #{item.publishTime}, #{item.deadTime}, #{item.image}, #{item.totalPerson}, #{item.donePerson})
+	    </foreach> 
+	</insert> 
+	
+</mapper>

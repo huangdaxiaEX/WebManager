@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- create by zzy -->
+
+<mapper namespace="com.cqut.dao.uesrInfoDao.UesrInfoDao">
+	<!-- select -->
+	<select id="getByID" resultType="com.cqut.entity.uesrInfo.UesrInfo">
+		<![CDATA[   
+			select * from uesrinfo 
+		]]>
+		<where>
+			uesrinfoid = #{ID}
+		</where>
+	</select>
+	
+	<select id="getByCondition" resultType="com.cqut.entity.uesrInfo.UesrInfo">
+		<![CDATA[   
+			select * from uesrinfo 
+		]]>
+		<where>
+			<if test="condition != null">
+		 		${condition}
+		 	</if>
+		</where>
+	</select>
+	
+	<select id="getCountByCondition" resultType="int">
+		select count(distinct uesrinfoid) from uesrinfo
+		<where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>	
+        </where>
+	</select>
+	
+	<select id="findByID" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from uesrinfo 
+        <where>
+        	uesrinfoid = #{ID}
+        </where>
+	</select>	
+	
+	<select id="findByCondition" resultType="map">
+		select 
+		<foreach collection="properties" item="item" index="index" separator=",">
+          	${item}
+        </foreach>
+        from uesrinfo 
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</select>		
+	
+	<!-- update -->
+	<update id="updateByID" >
+		<![CDATA[  
+			update uesrinfo set 
+				"uesrinfoid" = #{entity.uesrInfoID},
+				"username" = #{entity.userName},
+				"userid" = #{entity.userID},
+				"password" = #{entity.password},
+				"leve1" = #{entity.leve1}
+      	]]>
+      	<where>
+      		uesrinfoid = #{ID}
+      	</where>  		
+	</update>
+	
+	<update id="updateByCondition">
+		<![CDATA[  
+			update uesrinfo set 
+				"uesrinfoid" = #{entity.uesrInfoID},
+				"username" = #{entity.userName},
+				"userid" = #{entity.userID},
+				"password" = #{entity.password},
+				"leve1" = #{entity.leve1}
+      	]]>
+      	<where>
+      		<if test="condition != null">
+      			${condition}
+      		</if>
+      	</where>  		
+	</update>
+	
+	<update id="updatePropByID">
+		<![CDATA[  
+			update uesrinfo set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	uesrinfoid = #{ID}
+        </where>
+	</update>
+	
+	<update id="updatePropByCondition">
+		<![CDATA[  
+			update uesrinfo set
+		]]>
+		<foreach collection="prop" item="item" index="index" separator=",">
+          	${item.key} = #{item.value}
+        </foreach>
+        <where>
+        	<if test="condition != null">
+        		${condition}
+        	</if>
+        </where>
+	</update>	
+	
+	<!-- delete -->
+	<delete id="deleteByID" parameterType="string">
+		<![CDATA[   
+			delete from uesrinfo   
+		]]>
+		<where>
+			uesrinfoid = #{ID}
+		</where>
+	</delete>	
+
+	<delete id="deleteByCondition" parameterType="string">
+		<![CDATA[   
+			delete from uesrinfo  
+		]]>
+		<where>
+			<if test="condition != null">
+				${condition}
+			</if>	
+		</where>	
+	</delete>	
+	
+	<delete id="deleteUesrInfos" parameterType="string">
+		<![CDATA[   
+			delete from activity    
+		]]>
+		<where>
+			 uesrinfoid in
+			 <foreach collection="IDs" item="item" index="index" separator="," open="(" close=")">
+          		#{item}
+        	 </foreach>
+		</where>	
+	</delete>
+	
+	<!-- save -->
+	<insert id="save" parameterType="com.cqut.entity.uesrInfo.UesrInfo">  
+     	<![CDATA[   
+        	 insert into uesrinfo (uesrinfoid, username, userid, password, leve1)
+        	 values (#{uesrInfoID}, #{userName}, #{userID}, #{password}, #{leve1})	
+    	 ]]>   
+    </insert>
+    
+    <insert id="saveUesrInfos"> 
+	 	 <![CDATA[  
+	    	insert into uesrinfo (uesrinfoid, username, userid, password, leve1) 
+	    	VALUES 
+	    ]]>  
+	    <foreach collection="entities" item="item" index="index" separator=",">   
+	         (#{item.uesrInfoID}, #{item.userName}, #{item.userID}, #{item.password}, #{item.leve1})
+	    </foreach> 
+	</insert> 
+	
+</mapper>
