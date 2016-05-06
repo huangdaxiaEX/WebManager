@@ -1,0 +1,114 @@
+body{
+	margin:0;
+}
+
+.background{
+	width:100%;
+	height: 55rem;
+}
+
+.container{
+	position: absolute;
+	top:15rem;
+	right:17.2rem;
+}
+
+.login{
+	font-family: "微软雅黑";
+	font-size: 1.5rem;
+	color: white;
+	letter-spacing: 10px;
+	padding-bottom:5px;
+	text-decoration: none;
+}
+
+.register{
+	font-family: "微软雅黑";
+	font-size: 1.5rem;
+	color: white;
+	letter-spacing: 10px;
+	padding-bottom:5px;
+	margin-left:2rem;
+	text-decoration: none;
+}
+
+.loginContainer{
+	width:30rem;
+	height:26rem;
+	position: absolute;
+	right: 0rem;
+	top:17rem;
+}
+
+.checked{
+	border-bottom:1px dashed #ffffff;
+}
+
+.checkInput{
+	margin-top: 3rem;
+	margin-left: 2rem;
+}
+
+.username{
+	width:15rem;
+	height:1.5rem;
+}
+
+.pwd{
+	width:15rem;
+	height:1.5rem;
+	margin-top:1rem;
+}
+
+.loginButton{
+	width:15.5rem;
+	padding:0.5rem;
+	margin-top:2rem;
+	background-color: #000000;
+	font-size: 16px;
+	color: white;
+	letter-spacing: 1rem;
+	text-align: center;
+	border: 1px solid gray;
+}
+
+
+.registerContainer{
+	display:none;
+	width:30rem;
+	height:26rem;
+	position: absolute;
+	right: 0rem;
+	top:17rem;
+}
+
+.rusername{
+	width:15rem;
+	height:1.5rem;
+}
+
+.rpwd{
+	width:15rem;
+	height:1.5rem;
+	margin-top:1rem;
+}
+
+.isAgreeGeek{
+	margin-top:1rem;
+}
+
+.agreeFont{
+	color:white;
+}
+
+.registerButton{
+	width:15.5rem;
+	padding:0.5rem;
+	margin-top:2rem;
+	background-color: #000000;
+	font-size: 16px;
+	color: white;
+	letter-spacing: 1rem;
+	text-align: center;
+	border: 1px solid gray;
+}

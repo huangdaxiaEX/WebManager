@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>登录</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="登录">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="../css/loginAndRegister.css">
+</head>
+
+<body>
+	<div id="main">
+		<img src="../image/background.jpg" alt=" " class="background">
+		<div class="container">
+			<a href="javascript:;" class="title login checked">登录</a>
+			<a href="javascript:;" class="title register">注册</a>
+		</div>
+
+		<div class="loginContainer">
+			<div class="checkInput">
+				<input class="username" type="text" value="用户名"/><br/>	
+				<input class="pwd" type="text" value="密码"/><br/>
+				<button class="loginButton">登录</button>
+			</div>
+		</div>
+
+		<div class="registerContainer">
+			<div class="checkInput">
+				<input class="rusername" type="text" value="请输入用户名"/><br/>	
+				<input class="rpwd" type="text" value="请输入6~16位密码"/><br/>
+				<div class="isAgreeGeek">
+					<input type="checkbox" class="isAgree"/>
+					<span class="agreeFont">同意geeklearner服务条款</span>
+				</div>
+				<button class="registerButton">注册</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="../compoments/jquery-2.1.1.min.js"></script>
+	<script src="../js/loginAndRegister.js"></script>
+</body>
+</html>

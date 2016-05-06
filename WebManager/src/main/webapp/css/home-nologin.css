@@ -105,6 +105,23 @@ body {
 	background-color: white;
 }
 
+.content_title{
+	margin-top:7rem;
+	margin-left:2rem;
+	border-bottom: 1px solid #6543c2;	
+}
+
+.fixtitle{
+	font-size: 1.4rem;
+	color:#6543c2;
+}
+
+.changetitle{
+	font-size: 1.4rem;
+	color:#6543c2;
+	margin-left:1rem;
+}
+
 #rightFix{
 	width: 23rem;
 	height:30rem;
